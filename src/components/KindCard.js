@@ -8,7 +8,7 @@ const KindCard = ({imageSource, cardTitle, cardDesc}) => {
 
     return(
         <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={imageSource} />
+            <Card.Img variant="top" src={imageSource} style={{ height: '170px' }} />
             <Card.Body>
                 <Card.Title className="text-center">{cardTitle}</Card.Title>
                 <Card.Text className="text-center">
