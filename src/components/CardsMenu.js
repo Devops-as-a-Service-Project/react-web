@@ -10,11 +10,11 @@ const CardsMenu = () => {
     const cards = [
         { image: npmImage, title: 'NPM', desc: 'Nodejs application with NPM.'},
         { image: pythonImage, title: 'Python', desc: 'Python application with Pypi.'},
-        { image: npmImage, title: 'NPM', desc: 'Nodejs application with NPM.'},
-        { image: pythonImage, title: 'Python', desc: 'Python application with Pypi.'},
-        { image: pythonImage, title: 'Python', desc: 'Python application with Pypi.'},
-        { image: npmImage, title: 'NPM', desc: 'Nodejs application with NPM.'},
     ]
+
+    const createProject = () => {
+
+    }
 
     return(
         <Container>
