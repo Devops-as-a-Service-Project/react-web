@@ -1,8 +1,10 @@
 import React from 'react';
 import MainNavber from './components/MainNavbar'
+import RESTAPIView from './components/RESTAPIView'
 import Container from 'react-bootstrap/Container'
 import { Row } from 'react-bootstrap';
 import CardsMenu from './components/CardsMenu';
+import { Route, Switch } from "react-router-dom";
 
 function App() {
     return (
@@ -11,7 +13,12 @@ function App() {
                 <Row className="justify-content-md-left" style={{ 'padding': '40px'}}>
                     <MainNavber/>
                 </Row>
-                <CardsMenu/>
+                <Switch>
+                    <Route path='/' component={CardsMenu} exact/>
+                    <Route path='/create' component={CardsMenu}/>
+                    <Route path='/rest-api' component={RESTAPIView}/>
+                    <Route component={MainNavber}/>
+                </Switch>
             </Container>
         </main>
     );

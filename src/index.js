@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
-// import { BrowserRouter } from "react-router-dom"
+import { BrowserRouter } from "react-router-dom"
 
 ReactDOM.render(
-    // <BrowserRouter>
-    <App />,
-    // </BrowserRouter>
+  <BrowserRouter>
+    <App/>
+  </BrowserRouter>
+  ,
   document.getElementById('root')
 );
 
