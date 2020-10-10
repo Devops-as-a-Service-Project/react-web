@@ -22,6 +22,16 @@ const KindCard = ({imageSource, cardTitle, cardDesc}) => {
                         aria-label="Project Name"
                         aria-describedby="basic-addon1"
                         className="text-center"
+                        pattern="^[\S][a-zA-Z0-9_-]+$"
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <Form.Control
+                        placeholder="Repository Name"
+                        aria-label="Repository Name"
+                        aria-describedby="basic-addon1"
+                        className="text-center"
+                        pattern="^[\S][a-zA-Z0-9_-]+$"
                     />
                 </InputGroup>
                 <Button variant="dark">Create</Button>
