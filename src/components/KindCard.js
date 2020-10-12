@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Emoji from './Emoji';
 
 const KindCard = ({imageSource, cardTitle, cardDesc}) => {
 
@@ -11,6 +12,18 @@ const KindCard = ({imageSource, cardTitle, cardDesc}) => {
         projectName: '',
         repositoryName: '',
     });
+
+    const [isError, setIsError] = React.useState (false);
+
+    const [isSubmitted, setIsSubmitted] = React.useState(false);
+
+    const validateForm = () => {
+        let valid = true;
+        Object.values(data).forEach(
+            (val) => val.length > 0 || (valid = false)
+        );
+        return valid;
+    }
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -34,22 +47,32 @@ const KindCard = ({imageSource, cardTitle, cardDesc}) => {
 
 
     const handleClick = async (event) => {
-        const response = await fetch("/create/npm/" + data.projectName + "/" + data.repositoryName, {
-            method: "POST",
-            headers: {
-            "Content_Type": "application/json"
+
+        console.log(validateForm());
+
+        if (!validateForm()) {
+            setIsSubmitted(false)
+            setIsError(true)
+        } else {
+            setIsError(false)
+            const response = await fetch("/create/npm/" + data.projectName + "/" + data.repositoryName, {
+                method: "POST",
+                headers: {
+                "Content_Type": "application/json"
+                }
+            })
+            if (response.ok) {
+                setIsSubmitted(true)
+                console.log("Response Worked! ");
+                console.log(JSON.stringify(response.url));
+                console.log(response);
+                // setTitle("We found your favorite book!")
             }
-        })
-        if (response.ok) {
-            console.log("Response Worked! ");
-            console.log(JSON.stringify(response.url));
-            console.log(response);
-            // setTitle("We found your favorite book!")
-        }
-        else {
-            console.log("Response Didn't Worked...")
-            console.log(response);
-            // setTitle("We did not find this title. Please try again!")
+            else {
+                console.log("Response Didn't Worked...")
+                console.log(response);
+                // setTitle("We did not find this title. Please try again!")
+            }
         }
     }
 
@@ -85,6 +108,8 @@ const KindCard = ({imageSource, cardTitle, cardDesc}) => {
                         onChange={handleChange}
                     />
                 </InputGroup>
+                {isError ? <p className="form-status">Form is invalid <Emoji symbol="❌" label="error"/></p> : ''}
+                {isSubmitted ? <p className="form-status">Request Succeeded <Emoji symbol="✅" label="success"/></p> : ''}
                 <Button variant="dark" onClick={handleClick}>Create</Button>
             </Card.Body>
         </Card>
