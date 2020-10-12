@@ -13,6 +13,8 @@ const KindCard = ({imageSource, cardTitle, cardDesc}) => {
         repositoryName: '',
     });
 
+    const [isValid, setIsValid] = React.useState (true);
+
     const [isError, setIsError] = React.useState (false);
 
     const [isSubmitted, setIsSubmitted] = React.useState(false);
@@ -22,6 +24,7 @@ const KindCard = ({imageSource, cardTitle, cardDesc}) => {
         Object.values(data).forEach(
             (val) => val.length > 0 || (valid = false)
         );
+        setIsValid(valid);
         return valid;
     }
 
@@ -48,13 +51,12 @@ const KindCard = ({imageSource, cardTitle, cardDesc}) => {
 
     const handleClick = async (event) => {
 
-        console.log(validateForm());
+        console.log(isValid)
 
         if (!validateForm()) {
             setIsSubmitted(false)
-            setIsError(true)
         } else {
-            setIsError(false)
+            console.log(isValid)
             const response = await fetch("/create/npm/" + data.projectName + "/" + data.repositoryName, {
                 method: "POST",
                 headers: {
@@ -62,13 +64,16 @@ const KindCard = ({imageSource, cardTitle, cardDesc}) => {
                 }
             })
             if (response.ok) {
-                setIsSubmitted(true)
+                setIsSubmitted(true);
+                setIsError(true);
                 console.log("Response Worked! ");
                 console.log(JSON.stringify(response.url));
                 console.log(response);
                 // setTitle("We found your favorite book!")
             }
             else {
+                setIsError(true);
+                setIsSubmitted(false);
                 console.log("Response Didn't Worked...")
                 console.log(response);
                 // setTitle("We did not find this title. Please try again!")
@@ -108,8 +113,9 @@ const KindCard = ({imageSource, cardTitle, cardDesc}) => {
                         onChange={handleChange}
                     />
                 </InputGroup>
-                {isError ? <p className="form-status">Form is invalid <Emoji symbol="❌" label="error"/></p> : ''}
+                {(!isValid) ? <p className="form-status">Form is invalid <Emoji symbol="❌" label="error"/></p> : ''}
                 {isSubmitted ? <p className="form-status">Request Succeeded <Emoji symbol="✅" label="success"/></p> : ''}
+                {isError ? <p className="form-status">Request Failed <Emoji symbol="❌" label="error"/></p> : ''}
                 <Button variant="dark" onClick={handleClick}>Create</Button>
             </Card.Body>
         </Card>

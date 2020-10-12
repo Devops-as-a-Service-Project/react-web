@@ -1,6 +1,6 @@
 version: '3.8'
 services:
   nexus-uploader-ui:
-    image: daas/nexus-uploader-dashboard:1
+    image: maromitamar/daas-ui:1
     ports:
       - 80:80
