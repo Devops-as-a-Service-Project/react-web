@@ -14,10 +14,6 @@ const CardsMenu = () => {
         { image: mavenImage, title: 'Maven', desc: 'Java application with Maven.'},
     ]
 
-    const createProject = () => {
-
-    }
-
     return(
         <Container>
             <CardColumns className="justify-content-md-center">
