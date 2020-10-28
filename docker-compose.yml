@@ -1,6 +1,0 @@
-version: '3.8'
-services:
-  daas-ui:
-    image: maromitamar/daas-ui:2
-    ports:
-      - 80:80
