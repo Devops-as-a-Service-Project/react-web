@@ -2,7 +2,7 @@ pipeline {
   environment {
     // Docker registry information, please replace 'docker_hub_account' with your own.
     registry = "amitmazor/daas-ui"
-    registryCredential = "dockerhub"
+    registryCredential = 'dockerhub'
     // create an environment to save docker image informations
     dockerImage = ''
   }
