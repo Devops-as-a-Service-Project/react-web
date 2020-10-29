@@ -32,7 +32,7 @@ pipeline {
     // After build and deploy, delete the image to cleanup your server space.
     stage('Remove Unused docker image') {
       steps{
-        sh 'docker rmi $registry$BUILD_NUMBER'
+        sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
   }
