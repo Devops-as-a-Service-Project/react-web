@@ -1,7 +1,7 @@
 pipeline {
   environment {
     // Docker registry information, please replace 'docker_hub_account' with your own.
-    registry = amitmazor/daas-ui
+    registry = 'amitmazor/daas-ui'
     registryCredential = 'dockerhub'
     // create an environment to save docker image informations
     dockerImage = ''
@@ -32,7 +32,7 @@ pipeline {
     // After build and deploy, delete the image to cleanup your server space.
     stage('Remove Unused docker image') {
       steps{
-        sh docker rmi $registry$BUILD_NUMBER
+        sh 'docker rmi $registry$BUILD_NUMBER'
       }
     }
   }
